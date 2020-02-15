@@ -24,7 +24,7 @@
 			<key>key</key>
 			<string>unlockedSounds</string>
 			<key>label</key>
-			<string>Unlocked/NC</string>
+			<string>Unlocked</string>
 			<key>set</key>
 			<string>setAndPreview:forSpecifier:</string>
 			<key>title</key>

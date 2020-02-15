@@ -238,9 +238,8 @@
 
 }
 
-- (void)ACPowerChanged {
+- (void)playConnectedToPowerSoundIfNecessary {
 
-    %orig;
     if (enabled) {
         chargerSound = 0;
 		AudioServicesDisposeSystemSoundID(chargerSound);
@@ -491,11 +490,12 @@
 - (void)_playLockSound {
 
     %orig;
-    if (enabled) {
+    if (enabled ) {
         lockedSound = 0;
 		AudioServicesDisposeSystemSoundID(lockedSound);
 		AudioServicesCreateSystemSoundID((CFURLRef) CFBridgingRetain([NSURL fileURLWithPath:[NSString stringWithFormat:@"/Library/Nevve/%@",lockedSoundsList]]),& lockedSound);
 		AudioServicesPlaySystemSound(lockedSound); 
+        isUnlock = YES;
 
     }
 
@@ -559,11 +559,12 @@
 - (void)viewWillDisappear:(BOOL)arg1 {
 
     %orig;
-    if (enabled) {
+    if (enabled && isUnlock) {
         unlockedSound = 0;
 		AudioServicesDisposeSystemSoundID(unlockedSound);
 		AudioServicesCreateSystemSoundID((CFURLRef) CFBridgingRetain([NSURL fileURLWithPath:[NSString stringWithFormat:@"/Library/Nevve/%@",unlockedSoundsList]]),& unlockedSound);
 		AudioServicesPlaySystemSound(unlockedSound); 
+        isUnlock = NO;
 
     }
 

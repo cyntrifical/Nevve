@@ -1,6 +1,6 @@
 Package: sh.litten.nevve
-Name: Nevve
-Depends: mobilesubstrate, preferenceloader, firmware (>= 11), ws.hbang.common (>= 1.14)
+Name: Nevve ❄️
+Depends: mobilesubstrate, preferenceloader, firmware (>= 12), ws.hbang.common (>= 1.14)
 Architecture: iphoneos-arm
 Description: Sounds Falling Down To Your Device
 Maintainer: Litten <hello@litten.sh>
@@ -9,5 +9,5 @@ Section: Tweaks
 Depiction: https://repo.litten.sh/depictions/nve/index.html
 SileoDepiction: https://repo.litten.sh/depictions/nve/nve.json
 Icon: https://repo.litten.sh/depictions/nve/assets/icon.png
-Version: 1.0.3
+Version: 1.0.4
 Installed-Size: 716

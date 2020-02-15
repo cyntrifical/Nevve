@@ -47,7 +47,7 @@
 			<key>key</key>
 			<string>chargerSounds</string>
 			<key>label</key>
-			<string>Charger Plugged In/Out</string>
+			<string>Charger Plugged In</string>
 			<key>set</key>
 			<string>setAndPreview:forSpecifier:</string>
 			<key>title</key>

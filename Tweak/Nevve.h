@@ -14,6 +14,8 @@ BOOL dpkgInvalid = NO;
 BOOL enabled = YES;
 BOOL typingSoundSwitch = NO;
 
+BOOL isUnlock;
+
 // Homescreen
 SystemSoundID killingAppSound;
 SystemSoundID forceTouchSound;
