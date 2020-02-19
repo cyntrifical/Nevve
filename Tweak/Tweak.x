@@ -210,12 +210,14 @@
 
 + (void)playScreenshotSound {
 
-    %orig;
     if (enabled) {
         screenshotSound = 0;
 		AudioServicesDisposeSystemSoundID(screenshotSound);
 		AudioServicesCreateSystemSoundID((CFURLRef) CFBridgingRetain([NSURL fileURLWithPath:[NSString stringWithFormat:@"/Library/Nevve/%@",screenshotSoundsList]]),& screenshotSound);
 		AudioServicesPlaySystemSound(screenshotSound); 
+
+    } else {
+        %orig;
 
     }
 
@@ -489,13 +491,15 @@
 
 - (void)_playLockSound {
 
-    %orig;
     if (enabled ) {
         lockedSound = 0;
 		AudioServicesDisposeSystemSoundID(lockedSound);
 		AudioServicesCreateSystemSoundID((CFURLRef) CFBridgingRetain([NSURL fileURLWithPath:[NSString stringWithFormat:@"/Library/Nevve/%@",lockedSoundsList]]),& lockedSound);
 		AudioServicesPlaySystemSound(lockedSound); 
         isUnlock = YES;
+
+    } else {
+        %orig;
 
     }
 
