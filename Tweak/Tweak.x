@@ -210,7 +210,7 @@
 
 + (void)playScreenshotSound {
 
-    if (enabled) {
+    if (enabled && screenshotSoundSwitch) {
         screenshotSound = 0;
 		AudioServicesDisposeSystemSoundID(screenshotSound);
 		AudioServicesCreateSystemSoundID((CFURLRef) CFBridgingRetain([NSURL fileURLWithPath:[NSString stringWithFormat:@"/Library/Nevve/%@",screenshotSoundsList]]),& screenshotSound);
@@ -235,18 +235,6 @@
 		AudioServicesDisposeSystemSoundID(reachabilitySound);
 		AudioServicesCreateSystemSoundID((CFURLRef) CFBridgingRetain([NSURL fileURLWithPath:[NSString stringWithFormat:@"/Library/Nevve/%@",reachabilitySoundsList]]),& reachabilitySound);
 		AudioServicesPlaySystemSound(reachabilitySound); 
-
-    }
-
-}
-
-- (void)playConnectedToPowerSoundIfNecessary {
-
-    if (enabled) {
-        chargerSound = 0;
-		AudioServicesDisposeSystemSoundID(chargerSound);
-		AudioServicesCreateSystemSoundID((CFURLRef) CFBridgingRetain([NSURL fileURLWithPath:[NSString stringWithFormat:@"/Library/Nevve/%@",chargerSoundsList]]),& chargerSound);
-		AudioServicesPlaySystemSound(chargerSound); 
 
     }
 
@@ -656,6 +644,36 @@
 
 %end
 
+%hook UIAlertController
+
+-(void)viewWillAppear:(BOOL)arg1 {
+
+    %orig;
+    if (enabled) {
+        alertAppearSound = 0;
+		AudioServicesDisposeSystemSoundID(alertAppearSound);
+		AudioServicesCreateSystemSoundID((CFURLRef) CFBridgingRetain([NSURL fileURLWithPath:[NSString stringWithFormat:@"/Library/Nevve/%@",alertAppearSoundsList]]),& alertAppearSound);
+		AudioServicesPlaySystemSound(alertAppearSound); 
+
+    }
+
+}
+
+-(void)viewWillDisappear:(BOOL)arg1 {
+
+    %orig;
+    if (enabled) {
+        alertDisappearSound = 0;
+		AudioServicesDisposeSystemSoundID(alertDisappearSound);
+		AudioServicesCreateSystemSoundID((CFURLRef) CFBridgingRetain([NSURL fileURLWithPath:[NSString stringWithFormat:@"/Library/Nevve/%@",alertDisappearSoundsList]]),& alertDisappearSound);
+		AudioServicesPlaySystemSound(alertDisappearSound); 
+
+    }
+
+}
+
+%end
+
 %end
 
     // This is an Alert if the Tweak is pirated (DRM)
@@ -732,7 +750,8 @@
     // Enabled Switch
     [pfs registerBool:&enabled default:YES forKey:@"Enabled"];
     // Option Switches
-    [pfs registerBool:&typingSoundSwitch default:NO forKey:@"typingSoundSwitch"];
+    [pfs registerBool:&typingSoundSwitch default:NO forKey:@"typingSound"];
+    [pfs registerBool:& screenshotSoundSwitch default:NO forKey:@"screenshotSound"];
     // Homescreen
     [pfs registerObject:& killingAppSoundsList default:nil forKey:@"killingAppSounds"];
 	[pfs registerObject:& forceTouchSoundsList default:nil forKey:@"forceTouchSounds"];
@@ -754,6 +773,8 @@
     [pfs registerObject:& touchingSoundsList default:nil forKey:@"touchingSounds"];
     [pfs registerObject:& typingSoundsList default:nil forKey:@"typingSounds"];
     [pfs registerObject:& enteringHomescreenSoundsList default:nil forKey:@"enteringHomescreenSounds"];
+    [pfs registerObject:& alertAppearSoundsList default:nil forKey:@"alertAppearSounds"];
+    [pfs registerObject:& alertDisappearSoundsList default:nil forKey:@"alertDisappearSounds"];
     // Hardware Buttons
     [pfs registerObject:& volumeSoundsList default:nil forKey:@"volumeSounds"];
 	[pfs registerObject:& sleepButtonSoundsList default:nil forKey:@"sleepButtonSounds"];
@@ -770,7 +791,6 @@
     [pfs registerObject:& callSoundsList default:nil forKey:@"callSounds"];
     // Other Hardware Actions
     [pfs registerObject:& wakeSoundsList default:nil forKey:@"wakeSounds"];
-	[pfs registerObject:& chargerSoundsList default:nil forKey:@"chargerSounds"];
 
 	if (!dpkgInvalid && enabled) {
         BOOL ok = false;

@@ -37,25 +37,9 @@
 
 		<dict>
 			<key>cell</key>
-			<string>PSLinkListCell</string>
-			<key>default</key>
-			<string>None</string>
-			<key>defaults</key>
-			<string>sh.litten.nevvepreferences</string>
-			<key>detail</key>
-			<string>PSListItemsController</string>
-			<key>key</key>
-			<string>chargerSounds</string>
+			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>Charger Plugged In</string>
-			<key>set</key>
-			<string>setAndPreview:forSpecifier:</string>
-			<key>title</key>
-			<string>Other Hardware Actions</string>
-			<key>titlesDataSource</key>
-			<string>getData:</string>
-			<key>valuesDataSource</key>
-			<string>getData:</string>
+			<string>If You Want Sounds For When Plugging In The Charger Please Use Malipo</string>
 		</dict>
 		
 	</array>

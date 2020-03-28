@@ -13,6 +13,7 @@ BOOL dpkgInvalid = NO;
 // Option Switches
 BOOL enabled = YES;
 BOOL typingSoundSwitch = NO;
+BOOL screenshotSoundSwitch = NO;
 
 BOOL isUnlock;
 
@@ -50,6 +51,8 @@ SystemSoundID respringSound;
 SystemSoundID touchingSound;
 SystemSoundID typingSound;
 SystemSoundID enteringHomescreenSound;
+SystemSoundID alertAppearSound;
+SystemSoundID alertDisappearSound;
 
 NSString *siriSoundsList;
 NSString *screenshotSoundsList;
@@ -60,6 +63,8 @@ NSString *respringSoundsList;
 NSString *touchingSoundsList;
 NSString *typingSoundsList;
 NSString *enteringHomescreenSoundsList;
+NSString *alertAppearSoundsList;
+NSString *alertDisappearSoundsList;
 
 // Hardware Buttons
 SystemSoundID volumeSound;

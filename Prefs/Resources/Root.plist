@@ -164,7 +164,7 @@
 			<key>subtitle</key>
 			<string>Send Me An Email With Your Request</string>
 			<key>url</key>
-			<string>mailto:hello@litten.sh?subject=Nevve%20Feature%20Request</string>
+			<string>mailto:hiya@litten.love?subject=Nevve%20Feature%20Request</string>
 		</dict>
 		<dict>
 			<key>cellClass</key>
