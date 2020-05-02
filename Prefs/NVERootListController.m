@@ -1,4 +1,9 @@
 #include "NVERootListController.h"
+#import <Cephei/HBRespringController.h>
+#import "../Tweak/Nevve.h"
+#import <spawn.h>
+
+BOOL enabled = NO;
 
 @implementation NVERootListController
 
@@ -8,18 +13,17 @@
     if (self) {
         NVEAppearanceSettings *appearanceSettings = [[NVEAppearanceSettings alloc] init];
         self.hb_appearanceSettings = appearanceSettings;
-        self.respringButton = [[UIBarButtonItem alloc] initWithTitle:@"ReSpring" 
-                                    style:UIBarButtonItemStylePlain
-                                    target:self 
-                                    action:@selector(respring)];
-        self.respringButton.tintColor = [UIColor whiteColor];
-        self.navigationItem.rightBarButtonItem = self.respringButton;
+        self.enableSwitch = [[UISwitch alloc] init];
+        self.enableSwitch.onTintColor = [UIColor colorWithRed:1.00 green:0.96 blue:0.64 alpha:1.0];
+        [self.enableSwitch addTarget:self action:@selector(toggleState) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem* switchy = [[UIBarButtonItem alloc] initWithCustomView: self.enableSwitch];
+        self.navigationItem.rightBarButtonItem = switchy;
 
         self.navigationItem.titleView = [UIView new];
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0,0,10,10)];
         self.titleLabel.font = [UIFont boldSystemFontOfSize:17];
         self.titleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-        self.titleLabel.text = @"Nevve";
+        self.titleLabel.text = @"1.1.4";
         self.titleLabel.textColor = [UIColor whiteColor];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
         [self.navigationItem.titleView addSubview:self.titleLabel];
@@ -92,11 +96,12 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+
     [super viewDidAppear:animated];
 
     [self.navigationController.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
 
-    [self showThanksAlert];
+    [self setEnableSwitchState];
 
 }
 
@@ -140,28 +145,87 @@
 
 }
 
--(void)respringUtil {
-	NSTask *t = [[NSTask alloc] init];
-    [t setLaunchPath:@"/usr/bin/killall"];
-    [t setArguments:[NSArray arrayWithObjects:@"backboardd", nil]];
-    [t launch];
-}
+- (void)toggleState {
 
-- (void)showThanksAlert {
+    self.enableSwitch.enabled = NO;
 
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString* pathForNevvePlist = @"/var/mobile/Library/Preferences/sh.litten.nevvepreferences.plist";
-
-    if (!([fileManager fileExistsAtPath:pathForNevvePlist])) {
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Nevve"
-        message:@"Thanks For Downloading Nevve 🌸\nI hope you'll enjoy it 😊\n\n[Toggle Anything In The Prefs To Make This Alert Not Show Anymore]"
-        preferredStyle:UIAlertControllerStyleAlert];
-
-        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Understood" style:UIAlertActionStyleCancel handler:nil];
-        [alert addAction:cancelAction];
-        [self presentViewController:alert animated:YES completion:nil];
+    HBPreferences *pfs = [[HBPreferences alloc] initWithIdentifier: @"sh.litten.nevvepreferences"];
+    
+    if ([[pfs objectForKey:@"Enabled"] isEqual: @(NO)]) {
+        enabled = YES;
+        [pfs setBool:enabled forKey: @"Enabled"];
+        [self respringUtil];
+        
+    } else if ([[pfs objectForKey:@"Enabled"] isEqual: @(YES)]) {
+        enabled = NO;
+        [pfs setBool:enabled forKey: @"Enabled"];
+        [self respringUtil];
 
     }
+
+}
+
+- (void)setEnableSwitchState {
+
+    NSString* path = [NSString stringWithFormat:@"/var/mobile/Library/Preferences/sh.litten.nevvepreferences.plist"];
+    NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithContentsOfFile:path];
+    NSSet* allKeys = [NSSet setWithArray:[dictionary allKeys]];
+    
+    if (!([allKeys containsObject:@"Enabled"])) {
+        [self.enableSwitch setOn:NO animated: YES];
+
+    } else if ([[dictionary objectForKey:@"Enabled"] isEqual: @(YES)]) {
+        [self.enableSwitch setOn:YES animated: YES];
+
+    } else if ([[dictionary objectForKey:@"Enabled"] isEqual: @(NO)]) {
+        [self.enableSwitch setOn:NO animated: YES];
+        
+    }
+
+}
+
+- (void)resetPrompt {
+
+    UIAlertController *resetAlert = [UIAlertController alertControllerWithTitle:@"Nevve"
+	message:@"Do You Really Want To Reset Your Preferences?"
+	preferredStyle:UIAlertControllerStyleActionSheet];
+	
+    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"Yep" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * action) {
+			
+        [self resetPreferences];
+
+	}];
+
+	UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Nope" style:UIAlertActionStyleCancel handler:nil];
+
+	[resetAlert addAction:confirmAction];
+	[resetAlert addAction:cancelAction];
+
+	[self presentViewController:resetAlert animated:YES completion:nil];
+
+}
+
+- (void)resetPreferences {
+
+    HBPreferences *pfs = [[HBPreferences alloc] initWithIdentifier: @"sh.litten.nevvepreferences"];
+    for (NSString *key in [pfs dictionaryRepresentation]) {
+        [pfs removeObjectForKey:key];
+
+    }
+    
+    [self.enableSwitch setOn:NO animated: YES];
+    [self respringUtil];
+
+}
+
+- (void)respringUtil {
+
+    pid_t pid;
+    const char *args[] = {"killall", "backboardd", NULL};
+
+    [HBRespringController respringAndReturnTo:[NSURL URLWithString:@"prefs:root=Nevve"]];
+
+    posix_spawn(&pid, "/usr/bin/killall", NULL, NULL, (char *const *)args, NULL);
 
 }
 

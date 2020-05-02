@@ -1,5 +1,7 @@
 #import "Nevve.h"
 
+BOOL enabled;
+
 %group Nevve
 
 %hook SBMainDisplaySceneManager
@@ -712,7 +714,7 @@
     NSString *processName = [NSProcessInfo processInfo].processName;
     bool isSpringboard = [@"SpringBoard" isEqualToString:processName];
 
-    // Someone smarter than Nepeta invented this.
+    // Someone smarter than Nepeta invented this. ~~ Her Words
     // https://www.reddit.com/r/jailbreak/comments/4yz5v5/questionremote_messages_not_enabling/d6rlh88/
     bool shouldLoad = NO;
     NSArray *args = [[NSClassFromString(@"NSProcessInfo") processInfo] arguments];
@@ -748,7 +750,7 @@
 
     pfs = [[HBPreferences alloc] initWithIdentifier:@"sh.litten.nevvepreferences"];
     // Enabled Switch
-    [pfs registerBool:&enabled default:YES forKey:@"Enabled"];
+    [pfs registerBool:&enabled default:nil forKey:@"Enabled"];
     // Option Switches
     [pfs registerBool:&typingSoundSwitch default:NO forKey:@"typingSound"];
     [pfs registerBool:& screenshotSoundSwitch default:NO forKey:@"screenshotSound"];

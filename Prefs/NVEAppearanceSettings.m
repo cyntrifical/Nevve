@@ -30,8 +30,4 @@
     return NO;
 }
 
-- (NSUInteger)largeTitleStyle {
-    return 2;
-}
-
 @end

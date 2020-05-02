@@ -6,30 +6,18 @@
 	<array>
 
 		<dict>
-            <key>cell</key>
-            <string>PSButtonCell</string>
-            <key>label</key>
-            <string>@Litteeen</string>
-            <key>cellClass</key>
-            <string>HBTwitterCell</string>
-            <key>label</key>
-            <string>Litten</string>
-            <key>user</key>
-            <string>Litteeen</string>
-        </dict>
-		<dict>
-			<key>cell</key>
-			<string>PSSwitchCell</string>
-			<key>default</key>
-			<true/>
-			<key>defaults</key>
-			<string>sh.litten.nevvepreferences</string>
-			<key>key</key>
-			<string>Enabled</string>
-			<key>label</key>
-			<string>Enabled (Respring required)</string>
-			<key>PostNotification</key>
-			<string>sh.litten.nevvepreferences/ReloadPrefs</string>
+			<key>cellClass</key>
+			<string>DuoTwitterCell</string>
+			<key>firstLabel</key>
+			<string>Litten</string>
+			<key>firstAccount</key>
+			<string>Litteeen</string>
+			<key>secondLabel</key>
+			<string>taki</string>
+			<key>secondAccount</key>
+			<string>74k1_</string>
+			<key>height</key>
+			<real>57</real>
 		</dict>
 
 				<!-- Sub Menus -->
@@ -101,43 +89,94 @@
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>Original Roxanne Developer</string>
+			<string>Other Options</string>
 		</dict>
 		<dict>
-            <key>action</key>
-            <string>twitteriKilled</string>
-            <key>cell</key>
-            <string>PSButtonCell</string>
-            <key>label</key>
-            <string>@iKilledAppl3</string>
-            <key>cellClass</key>
-            <string>HBTwitterCell</string>
-            <key>label</key>
-            <string>iKilledAppl3</string>
-            <key>user</key>
-            <string>iKilledAppl3</string>
-        </dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Respring</string>
+			<key>action</key>
+			<string>respringUtil</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>Reset Preferences</string>
+			<key>action</key>
+			<string>resetPrompt</string>
+		</dict>
 
 		<dict>
 			<key>cell</key>
 			<string>PSGroupCell</string>
 			<key>label</key>
-			<string>Icon Design</string>
+			<string>Original Roxanne Developer</string>
+			<key>footerText</key>
+			<string>Thanks kritanta For The Pretty Twitter Cells</string>
+			<key>isStaticText</key>
+			<true/>
 		</dict>
 		<dict>
-            <key>action</key>
-            <string>twittertaki</string>
-            <key>cell</key>
-            <string>PSButtonCell</string>
-            <key>label</key>
-            <string>@74k1_</string>
-            <key>cellClass</key>
-            <string>HBTwitterCell</string>
-            <key>label</key>
-            <string>taki</string>
-            <key>user</key>
-            <string>74k1_</string>
-        </dict>
+			<key>cellClass</key>
+			<string>KRTwitterCell</string>
+			<key>label</key>
+			<string>iKilledAppl3</string>
+			<key>accountName</key>
+			<string>iKilledAppl3</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>KRTwitterCell</string>
+			<key>label</key>
+			<string>Kritanta</string>
+			<key>accountName</key>
+			<string>_kritanta</string>
+		</dict>
+
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Give These A Look</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBLinkTableCell</string>
+			<key>label</key>
+			<string>Rose</string>
+			<key>subtitle</key>
+			<string>System Wide Haptics, Great uh-huh</string>
+			<key>icon</key>
+			<string>Rose.png</string>
+			<key>url</key>
+			<string>https://repo.litten.love/depictions/rse/</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBLinkTableCell</string>
+			<key>label</key>
+			<string>Lune</string>
+			<key>subtitle</key>
+			<string>Let A Moon Icon Appear While In DND</string>
+			<key>icon</key>
+			<string>Lune.png</string>
+			<key>url</key>
+			<string>https://repo.litten.love/depictions/lne/</string>
+		</dict>
+		<dict>
+			<key>cellClass</key>
+			<string>HBLinkTableCell</string>
+			<key>label</key>
+			<string>Butterfly</string>
+			<key>subtitle</key>
+			<string>Text Selection, But Colorful</string>
+			<key>icon</key>
+			<string>Butterfly.png</string>
+			<key>url</key>
+			<string>https://repo.litten.love/depictions/bty/</string>
+		</dict>
 
 		<!-- Support Me -->
 		<dict>
@@ -145,6 +184,11 @@
 			<string>PSGroupCell</string>
 			<key>label</key>
 			<string>Support Me</string>
+			<key>footerText</key>
+			<string>Nevve By Litten
+Artworks By taki</string>
+			<key>isStaticText</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>cellClass</key>
@@ -164,7 +208,7 @@
 			<key>subtitle</key>
 			<string>Send Me An Email With Your Request</string>
 			<key>url</key>
-			<string>mailto:hiya@litten.love?subject=Nevve%20Feature%20Request</string>
+			<string>https://litten.love/report.html</string>
 		</dict>
 		<dict>
 			<key>cellClass</key>
@@ -184,16 +228,18 @@
 			<key>subtitle</key>
 			<string>Leave A Bug Report Here</string>
 			<key>url</key>
-			<string>https://github.com/Litteeen/Nevve/issues/new</string>
+			<string>https://litten.love/report.html</string>
 		</dict>
 
 		<dict>
 			<key>cell</key>
-			<string>PSGroupCell</string>
+			<key>PSGroupCell</key>
 			<key>footerText</key>
-			<string>Nevve By Litten, Made With ❤️</string>
+			<string>Made With 💙</string>
 			<key>isStaticText</key>
 			<true/>
+			<key>footerAlignment</key>
+			<real>1</real>
 		</dict>
 
 	</array>

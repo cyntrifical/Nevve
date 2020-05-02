@@ -52,7 +52,7 @@
 
     if ([directoryHomescreenContent count] == 0) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Nevve"
-        message:@"Dang!\nIt Looks Like You Haven't Installed Any Sound Extensions, Go And Download At Least One Sound Extension From My Repo Or Place Your Own Sound File Into /Library/Nevve/ c:"
+        message:@"Dang!\nIt Looks Like You Haven't Installed Any Sound Extensions, Go And Download At Least One Sound Extension From My Repo Or Place Your Own Sound File In /Library/Nevve/ c:"
         preferredStyle:UIAlertControllerStyleAlert];
 
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Understood" style:UIAlertActionStyleCancel handler:nil];

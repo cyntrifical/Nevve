@@ -11,7 +11,7 @@ HBPreferences *pfs;
 BOOL dpkgInvalid = NO;
 
 // Option Switches
-BOOL enabled = YES;
+extern BOOL enabled;
 BOOL typingSoundSwitch = NO;
 BOOL screenshotSoundSwitch = NO;
 

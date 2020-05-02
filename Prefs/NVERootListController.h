@@ -3,7 +3,6 @@
 #import <CepheiPrefs/HBRootListController.h>
 #import <CepheiPrefs/HBAppearanceSettings.h>
 #import <Cephei/HBPreferences.h>
-#import "NSTask.h"
 
 @interface NVEAppearanceSettings : HBAppearanceSettings
 @end
@@ -12,13 +11,16 @@
     UITableView * _table;
 }
 
-@property (nonatomic, retain) UIBarButtonItem *respringButton;
+@property(nonatomic, retain)UISwitch* enableSwitch;
 @property (nonatomic, retain) UIView *headerView;
 @property (nonatomic, retain) UIImageView *headerImageView;
 @property (nonatomic, retain) UILabel *titleLabel;
 @property (nonatomic, retain) UIImageView *iconView;
 
-- (void)respring;
+- (void)toggleState;
+- (void)setEnableSwitchState;
+- (void)resetPrompt;
+- (void)resetPreferences;
 - (void)respringUtil;
-- (void)showThanksAlert;
+
 @end
